@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaction</title>
+    <!-- Include the A-Frame library -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- Include the aframe-event-set-component library for handling events -->
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+</head>
+<body>
+    <!-- Define the A-Frame scene -->
+    <a-scene>
+        <!-- Define a camera with a cursor for interaction -->
+        <a-camera>
+            <a-cursor></a-cursor>
+        </a-camera>
+        
+        <!-- Define a green box with an animation triggered by events -->
+        <a-box
+            position="-2 1.5 -3"
+            color="green"
+            animation__scale="
+                property: scale;
+                to: 0.5 1.5 0.5;
+                dur: 2000;
+                loop: true;
+                startEvents: click;
+                pauseEvents: mouseleave;
+                resumeEvents: mouseenter;
+            "
+        ></a-box>
+        
+        <!-- Define a red box with event-based interactions -->
+        <a-box
+            position="0 1.5 -3"
+            color="red"
+            event-set__mouseleave="
+                _event: mouseleave;
+                color: #00aa00;
+                rotation: 0 45 45;
+            "
+            event-set__mouseenter="
+                _event: mouseenter;
+                color: red;
+                rotation: 0 0 0;
+            "
+            event-set__click="
+                _event: click;
+                color: #aa00aa;
+                rotation: 45 0 45;
+                _target: #yellowbox;
+            "
+        ></a-box>
+        
+        <!-- Define a yellow box with no animations -->
+        <a-box
+            id="yellowbox"
+            position="2 1.5 -3"
+            color="yellow"
+        ></a-box>
+    </a-scene>
+</body>
+</html>
