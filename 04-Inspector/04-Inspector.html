@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspector</title>
+    <!-- Include the A-Frame library -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+</head>
+<body>
+    <!-- Define the A-Frame scene -->
+    <a-scene>
+        <!-- To activate Inspector: Press Ctrl (Cmd) + Alt + I -->
+        
+        <!-- Define a red box with the following properties:
+             - ID: box1
+             - Color: red (#aa0000)
+             - Position: (0, 2.5, -3)
+             - Material color: pink (#ff80ff)
+             - Rotation: (0, 45, 0) -->
+        <a-box id="box1" color="#aa0000" position="0 2.5 -3" material="color: #ff80ff" geometry="" rotation="0 45 0"></a-box>
+        
+        <!-- Define a green box with the following properties:
+             - ID: box2
+             - Rotation: (0, 0, 45)
+             - Scale: (0.5, 1, 0.5)
+             - Color: green (#00aa00)
+             - Position: (2, 1, -3) -->
+        <a-box id="box2" rotation="0 0 45" scale="0.5 1 0.5" color="#00aa00" position="2 1 -3"></a-box>
+        
+        <!-- Define a yellow box with the following properties:
+             - ID: box3
+             - Color: yellow (#aaaa00)
+             - Position: (-2, 1, -3)
+             - Material color: gray (#808080)
+             - Scale: (2, 2, 2) -->
+        <a-box id="box3" color="#aaaa00" position="-2 1 -3" material="color: #808080" geometry="" scale="2 2 2"></a-box>
+        
+        <!-- Define an octahedron with the following properties:
+             - Geometry: octahedron
+             - Material color: blue (#0080c0)
+             - Position: (0, 0, -3) -->
+        <a-entity geometry="primitive: octahedron" material="color: #0080c0" position="0 0 -3"></a-entity>
+    </a-scene>
+</body>
+</html>
