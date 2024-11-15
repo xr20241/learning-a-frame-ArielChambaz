@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model (glb/glTF)</title>
+    <!-- Include the A-Frame library -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- Include the aframe-extras library for additional components and systems -->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+    <!-- Define the A-Frame scene -->
+    <a-scene>
+        <!-- Define assets to be used in the scene -->
+        <a-assets>
+            <!-- Load a 3D model (glTF format) -->
+            <a-asset-item id="laptop" src="models/Notebook.gltf"></a-asset-item>
+        </a-assets>
+        
+        <!-- Define an entity that uses the loaded 3D model with specific position, rotation, and animation -->
+        <a-entity
+            gltf-model="#laptop"
+            position="-5 0 -5"
+            rotation="0 180 0"
+            animation-mixer="
+                clip: ArmatureAction;
+                loop: pingpong;
+            "
+        ></a-entity>
+        
+        <!-- Define a glTF model directly with specific position, rotation, and animation -->
+        <a-gltf-model
+            src="models/Notebook.gltf"
+            position="0 0 -5"
+            rotation="0 90 0"
+            animation-mixer
+        ></a-gltf-model>
+        
+        <!-- Define another entity that uses the 3D model with specific position and animation -->
+        <a-entity
+            gltf-model="models/Notebook.gltf"
+            position="5 0 -5"
+            animation-mixer="
+                clip: ArmatureAction;
+                loop: pingpong;
+            "
+        ></a-entity>
+    </a-scene>
+</body>
+</html>
