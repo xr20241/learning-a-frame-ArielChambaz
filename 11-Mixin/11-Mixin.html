@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mixin (A-Frame's CSS)</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-assets>
+            <!-- Define a mixin for a red box geometry with red material -->
+            <a-mixin
+                id="redbox"
+                geometry="primitive: box;"
+                material="color: red;"
+            ></a-mixin>
+
+            <!-- Define a mixin for spinning animation -->
+            <a-mixin
+                id="spinning"
+                animation="
+                    property: rotation;
+                    to: 0 360 0;
+                    dur: 2000;
+                    loop: true;
+                    startEvents: click;
+                "
+            ></a-mixin>
+
+            <!-- Define a mixin for a green material -->
+            <a-mixin
+                id="hijau"
+                material="color: green"
+            ></a-mixin>
+        </a-assets>
+
+        <!-- Define the camera with a cursor for interaction -->
+        <a-camera>
+            <a-cursor></a-cursor>
+        </a-camera>
+
+        <!-- Create an entity with a combination of red and green box mixins -->
+        <a-entity
+            position="0 1.5 -3"
+            mixin="redbox hijau"
+        ></a-entity>
+
+        <!-- Create an entity with spinning animation, green material, and red box -->
+        <a-entity
+            position="2 1.5 -3"
+            mixin="spinning hijau redbox"
+        ></a-entity>
+
+        <!-- Create an entity with red box, green material, and spinning animation -->
+        <a-entity
+            position="-2 1.5 -3"
+            mixin="redbox hijau spinning"
+        ></a-entity>
+
+    </a-scene>
+</body>
+</html>
