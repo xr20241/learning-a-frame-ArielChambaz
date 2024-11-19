@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+    <script>
+        // Register a custom component 'soundcontroller' to handle sound controls
+        AFRAME.registerComponent('soundcontroller', {
+            init:function() {
+                let el = this.el;  // Reference to the element this component is attached to
+                // Add an event listener for the 'click' event
+                el.addEventListener('click', function(ev) {
+                    let id = ev.srcElement.id;  // Get the ID of the clicked element
+                    console.log(`%c${id}`,"font-size:2em;");
+                    let speaker = document.querySelector("#speaker");  // Get the speaker element (where sound is attached)
+                    // Check the ID of the clicked element and control the sound accordingly
+                    if (id == "play") {
+                        speaker.components.sound.playSound();  // Play sound if 'play' is clicked
+                    } else if (id == "pause") {
+                        speaker.components.sound.pauseSound();  // Pause sound if 'pause' is clicked
+                    } else {
+                        speaker.components.sound.stopSound();  // Stop sound if 'stop' is clicked
+                    }
+                });
+            }
+        });
+    </script>
+    <a-scene>
+        <!-- Define the camera and a cursor for interaction with the scene -->
+        <a-camera>
+            <a-cursor raycaster="objects:a-box"></a-cursor>
+        </a-camera>
+        <!-- Add a sky with a light blue color for the scene background -->
+        <a-sky color="lightblue"></a-sky>
+        <!-- Add a 3D ocean element to the scene -->
+        <a-ocean width="100" depth="100" density="40"></a-ocean>
+        <!-- Add a 3D model (island) to the scene -->
+        <a-gltf-model
+            src="models/Island.gltf"
+            gltf-model="models/Island.gltf"
+            scale="0.1 0.1 0.1"
+            rotation="0 150 0"
+            position="0 0 -3"
+        ></a-gltf-model>
+        <!-- Define the speaker box where the sound will be played -->
+        <a-box id="speaker" color="#F00" position="0 1.5 -3"
+            sound="src:audios/Cartoon.wav;autoplay:false;"
+        ></a-box>
+        <!-- Define the play button for controlling sound -->
+        <a-box soundcontroller id="play" color="#500" position="0 1 -2" scale="0.5 0.5 0.5"></a-box>
+        <!-- Define the pause button for controlling sound -->
+        <a-box soundcontroller id="pause" color="#550" position="1.5 1 -2" scale="0.5 0.5 0.5"></a-box>
+        <!-- Define the stop button for controlling sound -->
+        <a-box soundcontroller id="stop" color="#050" position="-1.5 1 -2" scale="0.5 0.5 0.5"></a-box>
+    </a-scene>
+</body>
+</html>
