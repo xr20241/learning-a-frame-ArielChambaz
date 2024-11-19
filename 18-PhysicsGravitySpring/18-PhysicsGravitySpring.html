@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Simulation</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+</head>
+<body>
+    <script>
+        // Registering a custom A-Frame component 'boxgenerator' to generate boxes
+        AFRAME.registerComponent('boxgenerator', {
+            init:function() {
+                let el = this.el;  // Reference to the element this component is attached to
+                // Listen for a 'click' event on the element
+                el.addEventListener('click', function() {
+                    let scene = document.querySelector("#scene");  // Get the scene element
+                    let newBox = document.createElement("a-box");  // Create a new box element
+                    newBox.setAttribute("scale", "0.2 0.2 0.2");  // Set the size of the new box
+                    newBox.setAttribute("color", "red");  // Set the color of the new box
+                    // Randomize the X position of the new box between -1 and 1
+                    let temp = Math.random() * 2 - 1;
+                    newBox.setAttribute("position", `${temp} 2 -3`);  // Set the position of the new box
+                    newBox.setAttribute("dynamic-body", "shape:box");  // Enable physics for the box
+                    newBox.setAttribute("spring", "target:#anchor;stiffness:25");  // Add a spring joint to the box
+                    scene.appendChild(newBox);  // Add the new box to the scene
+                });
+            }
+        });
+    </script>
+    <a-scene id="scene" physics="debug:true">
+        <!-- The camera element with position set -->
+        <a-camera position="0 1.5 2">
+            <a-cursor></a-cursor>  <!-- Add cursor for interaction -->
+        </a-camera>
+        <!-- The anchor box that is static and will be the target for the spring joint -->
+        <a-box
+            color="red"
+            id="anchor"
+            scale="0.5 0.5 0.5"
+            static-body
+            position="0 2.5 -3"
+            wireframe="true"
+        ></a-box>
+        <!-- The clickable box that generates new boxes when clicked -->
+        <a-box boxgenerator color="yellow" scale="0.2 0.2 0.2" position="0 1.5 -3"></a-box>
+        <!-- The ground plane with static-body for collision detection -->
+        <a-plane
+            static-body
+            color="#222"
+            rotation="-90 0 0" 
+            scale="15 15 15"
+        ></a-plane>
+    </a-scene>
+</body>
+</html>
